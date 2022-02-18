@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Task 1: Method 2</title>
+    <title>Task 1: Method 3</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,12 +11,16 @@
 
 <body>
     <script>
-        let menu = {
-            "Hotdog": 4,
-            "Fries": 3.5,
-            "Soda": 1.5,
-            "Sauerkraut": 1
+        function MenuItem(name, price) {
+            this.name = name;
+            this.price = price;
         };
+        let hotdog = new MenuItem("Hotdog", 4);
+        let fries = new MenuItem("Fries", 3.5);
+        let soda = new MenuItem("Soda", 1.5);
+        let sauerkraut = new MenuItem("Sauerkraut", 1);
+
+        let menu = [hotdog, fries, soda, sauerkraut];
 
         window.onload = () => {
             const form = document.querySelector('form');
@@ -29,12 +33,12 @@
                 let total = 0;
 
                 for (let i = 0; i < form.length - 1; i++) {
-                    for (let key of Object.keys(menu)) {
-                        if (form.elements[i].name === key) {
-                            totalForMenuItem = form.elements[i].value * menu[key];
+                    for (let j = 0; j <= menu.length - 1; j++) {
+                        if (form.elements[i].name === menu[j].name) {
+                            totalForMenuItem = form.elements[i].value * menu[j].price;
                             total += totalForMenuItem;
-                        }
-                    }
+                        };
+                    };
                     totalPriceText = "Your total is: $" + parseFloat(total).toFixed(2);
                     if (form.elements[i].value > 0) {
                         orderSummary += " ~ " + form.elements[i].value + " " + form.elements[i].name + " ";
@@ -45,19 +49,18 @@
                 document.getElementById("orderSummary").innerHTML = orderSummary;
                 document.getElementById("totalPrice").innerHTML = totalPriceText;
                 event.preventDefault();
-
             })
 
-            for (let key of Object.keys(menu)) {
+            for (let i = 0; i <= menu.length - 1; i++) {
                 var label = document.createElement("label");
-                label.setAttribute('for', key);
-                label.innerHTML = key + " <span> \($" + parseFloat(menu[key]).toFixed(2) + " each) </span>";
+                label.setAttribute('for', menu[i].name);
+                label.innerHTML = menu[i].name + " <span> \($" + parseFloat(menu[i].price).toFixed(2) + " each) </span>";
                 quantityInputs.appendChild(label);
 
                 var input = document.createElement("input");
                 input.setAttribute('type', 'number');
-                input.setAttribute('id', key);
-                input.setAttribute('name', key);
+                input.setAttribute('id', menu[i].name);
+                input.setAttribute('name', menu[i].name);
                 input.setAttribute('min', 0);
                 input.setAttribute('value', 0);
                 quantityInputs.appendChild(input);
@@ -67,7 +70,7 @@
     </script>
 
     <h1>Joe's Hotdogs</h1>
-    <h3>Task 1: Method 2: Simple Object Format</h3>
+    <h3>Task 1: Method 3: Function Objects</h3>
     <h2>Place Your Order</h2>
 
     <form id="orderForm">
