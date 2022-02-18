@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Task 1: Method 1</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <script>
+        let menu = [];
+        menu["Hotdog"] = 4;
+        menu["Fries"] = 3.5;
+        menu["Soda"] = 1.5;
+        menu["Sauerkraut"] = 1;
+
+        window.onload = () => {
+            const form = document.querySelector('form');
+            const quantityInputs = document.getElementById('quantityInputs');
+
+            form.addEventListener('submit', event => {
+                let orderSummary = "";
+                let totalPriceText = "";
+                let totalForMenuItem = 0;
+                let total = 0;
+                for (let i = 0; i < form.length - 1; i++) {
+                    for (menuItem in menu) {
+                        if (form.elements[i].name === menuItem) {
+                            totalForMenuItem = form.elements[i].value * menu[menuItem];
+                            total += totalForMenuItem;
+                        };
+                    };
+                    totalPriceText = "Your total is: $" + parseFloat(total).toFixed(2);
+
+                    if (form.elements[i].value > 0) {
+                        orderSummary += " ~ " + form.elements[i].value + " " + form.elements[i].name + " ";
+                    }
+                }
+
+                document.getElementById("orderSummaryHeader").innerHTML = "Order Summary";
+                document.getElementById("orderSummary").innerHTML = orderSummary;
+                document.getElementById("totalPrice").innerHTML = totalPriceText;
+                event.preventDefault();
+            })
+
+            for (menuItem in menu) {
+                var label = document.createElement("label");
+                label.setAttribute('for', menuItem);
+                label.innerHTML = menuItem + " <span> \($" + parseFloat(menu[menuItem]).toFixed(2) + " each) </span>";
+                quantityInputs.appendChild(label);
+
+                var input = document.createElement("input");
+                input.setAttribute('type', 'number');
+                input.setAttribute('id', menuItem);
+                input.setAttribute('name', menuItem);
+                input.setAttribute('min', 0);
+                input.setAttribute('value', 0);
+                quantityInputs.appendChild(input);
+                quantityInputs.appendChild(document.createElement("br"));
+            }
+        }
+    </script>
+
+
+    <h1>Joe's Hotdogs</h1>
+    <h3>Task 1: Method 1: Associative Array of Items and Prices</h3>
+    <h2>Place Your Order</h2>
+
+    <form id="orderForm">
+        <div id="quantityInputs"></div>
+        <input id="submit" type="submit" value="Submit">
+    </form>
+
+    <h2 id="orderSummaryHeader"></h2>
+    <p id="orderSummary"></p>
+    <p id="totalPrice"></p>
+
+</body>
+
+</html>

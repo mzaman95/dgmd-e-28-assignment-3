@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Task 1: Method 1</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <script>
+        let menu = {
+            "Hotdog": 4,
+            "Fries": 3.5,
+            "Soda": 1.5,
+            "Sauerkraut": 1
+        };
+
+        window.onload = () => {
+            const form = document.querySelector('form');
+            const quantityInputs = document.getElementById('quantityInputs');
+
+            form.addEventListener('submit', event => {
+                let orderSummary = "";
+                let totalPriceText = "";
+                let totalForMenuItem = 0;
+                let total = 0;
+
+                for (let i = 0; i < form.length - 1; i++) {
+                    for (let key of Object.keys(menu)) {
+                        if (form.elements[i].name === key) {
+                            totalForMenuItem = form.elements[i].value * menu[key];
+                            total += totalForMenuItem;
+                        }
+                    }
+                    totalPriceText = "Your total is: $" + parseFloat(total).toFixed(2);
+                    if (form.elements[i].value > 0) {
+                        orderSummary += " ~ " + form.elements[i].value + " " + form.elements[i].name + " ";
+                    }
+                }
+
+                document.getElementById("orderSummaryHeader").innerHTML = "Order Summary";
+                document.getElementById("orderSummary").innerHTML = orderSummary;
+                document.getElementById("totalPrice").innerHTML = totalPriceText;
+                event.preventDefault();
+
+            })
+
+            for (let key of Object.keys(menu)) {
+                console.log(key);
+                console.log(menu[key]);
+                var label = document.createElement("label");
+                label.setAttribute('for', key);
+                label.innerHTML = key + " <span> \($" + parseFloat(menu[key]).toFixed(2) + " each) </span>";
+                quantityInputs.appendChild(label);
+
+                var input = document.createElement("input");
+                input.setAttribute('type', 'number');
+                input.setAttribute('id', key);
+                input.setAttribute('name', key);
+                input.setAttribute('min', 0);
+                input.setAttribute('value', 0);
+                quantityInputs.appendChild(input);
+                quantityInputs.appendChild(document.createElement("br"));
+            }
+        }
+    </script>
+
+    <h1>Joe's Hotdogs</h1>
+    <h3>Task 1: Method 2: Simple Object Format</h3>
+    <h2>Place Your Order</h2>
+
+    <form id="orderForm">
+        <div id="quantityInputs"></div>
+        <input id="submit" type="submit" value="Submit">
+    </form>
+
+    <h2 id="orderSummaryHeader"></h2>
+    <p id="orderSummary"></p>
+    <p id="totalPrice"></p>
+
+</body>
+
+</html>
