@@ -15,10 +15,12 @@
   <div class="row">
     <div class="column">
       <h2>Y O U</h2>
+      <p>Current total: <span id="displayPlayerTotal"></span></p>
       <div id="playerCards"></div>
     </div>
     <div class="column">
       <h2>D E A L E R</h2>
+      <p>Current total: <span id="displayDealerTotal"></span></p>
       <div id="dealerCards"></div>
       <div id="facedown"></div>
     </div>
@@ -66,7 +68,7 @@
       };
 
       // Create A card - default value is 1
-      deck.push({ text: "A", value: 1, suit: suits[i] });
+      deck.push({ text: "A", value: 11, suit: suits[i] });
     }
 
 
@@ -93,8 +95,24 @@
       }
     }
 
+    var playerTotal = 0;
+    var dealerTotal = 0;
+
+    let displayPlayerTotal = document.getElementById("displayPlayerTotal");
+    let displayDealerTotal = document.getElementById("displayDealerTotal");
+
+    const setPlayerTotal = (totalCount) => {
+      playerTotal += totalCount;
+      displayPlayerTotal.innerHTML = playerTotal;
+    }
+
+    const setDealerTotal = (totalCount) => {
+      dealerTotal += totalCount;
+      displayDealerTotal.innerHTML = dealerTotal;
+    }
+
     // To create a new card and append to parent element
-    const createNewCard = (parentElement) => {
+    const createNewCard = (parentElement, player) => {
       let randomGeneratedCard = getRandomCard();
       let newCard = document.createElement("div");
       newCard.setAttribute("id", "card");
@@ -107,14 +125,17 @@
       suitSpan.innerHTML = getSuit(randomGeneratedCard.suit);
       newCard.appendChild(suitSpan);
       parentElement.appendChild(newCard);
+      if (player == "user") {
+        setPlayerTotal(randomGeneratedCard.value);
+      }
+      if (player == "dealer") {
+        setDealerTotal(randomGeneratedCard.value);
+      }
     }
 
-    playerCards = document.getElementById("playerCards");
-    createNewCard(playerCards);
-    createNewCard(playerCards);
-    createNewCard(dealerCards);
-
-
+    createNewCard(playerCards, "user");
+    createNewCard(playerCards, "user");
+    createNewCard(dealerCards, "dealer");
 
   </script>
 </body>

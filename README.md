@@ -58,11 +58,11 @@ An ace and a ten card are 21 in two cards, which is called Blackjack/Natural.
 
 - The game starts with you placing a bet.
 - The dealer deals you 2 cards face up and deals themselves 1 card face up and 1 card face down.
-- If the total of your 2 cards is 21, then you automatically win one and a half times your bet and you win.
+- If the total of your 2 cards is 21, then you automatically win one and a half times your bet and you win the game.
 - Otherwise, the dealer will ask whether you want another card from the deck. If you do, say "Hit". If you don't want any more cards, say "Stay".
 - There's no limit to how many cards you can ask for but if you hit higher than 21, then you bust.
 - If you stay, then the dealer will reveal their second card. If its 16 or under, they have to take another card. If its 17 or higher they have to stay with their hand.
-- If the dealer busts, then the player (you) will win twice your bet. If the dealer doesn't bust, then only the players whose cards are higher than the dealer wins twice their bet. Everyone else loses their initial bet.
+- If the dealer busts, then you will win twice your bet. If the dealer doesn't bust, then only the players whose cards are higher than the dealer wins twice their bet. Everyone else loses their initial bet.
 
 ### Requirements
 
