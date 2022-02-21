@@ -1,13 +1,24 @@
 * {
     font-family: 'Josefin Sans', sans-serif;
+    box-sizing: border-box;
 }
 
 body {
     background-color: #0d7567;
 }
 
+h2 {
+  color: #ffc0a9;
+}
+
 p {
     color: white;
+}
+
+#gameTitle {
+  color: #ffe66c;
+  text-align: center;
+  padding-top: 50px;
 }
 
 .modal {
@@ -55,4 +66,17 @@ input[type=number] {
 	margin: 8px 0;
 	padding: 10px 20px;
 	width: 30%;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 30px;
+  text-align: center;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }

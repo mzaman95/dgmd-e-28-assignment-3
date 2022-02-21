@@ -56,8 +56,8 @@ An ace and a ten card are 21 in two cards, which is called Blackjack/Natural.
 
 **Rules**
 
-- The game starts with you (not the dealer) placing a bet.
-- The dealer will then deal 1 card face up to you, the player, and will deal 1 card face up to themselves.
+- The game starts with you placing a bet.
+- The dealer will then deal 1 card face up to you and will deal 1 card face up to themselves.
 - You are then dealt another card face up. The dealer will deal another card to themselves but face down.
 - If the total of your 2 cards is 21, then you automatically win one and a half times your bet and you're done for that round.
 - Otherwise, the dealer will ask whether you want another card from the deck. If you do, say "Hit". If you don't want any more cards, say "Stay".

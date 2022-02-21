@@ -1,42 +1,78 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Blackjack</title>
-    <link rel="stylesheet" href="blackjack-style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap" rel="stylesheet">
+  <title>Blackjack</title>
+  <link rel="stylesheet" href="blackjack-style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap" rel="stylesheet">
 </head>
 
 <body>
+  <h1 id="gameTitle">B L A C K J A C K</h1>
+  <div class="row">
+    <div class="column">
+      <h2>Y O U</h2>
+      <p>Your bet amount: <span id="displayBetAmount"></span></p>
+      <p>Some text..</p>
+    </div>
+    <div class="column">
+      <h2>D E A L E R</h2>
+      <p>Some text..</p>
+    </div>
+  </div>
 
-<p>Your bet amount: <span id="displayBetAmount"></span></p>
-
-<!-- The bet modal: Prompts the user to place their bet amount from their wallet-->
-<div id="betModal" class="modal">
-  <div class="modalContent">
-    <h1>Place Your Bet</h1>
-    <form id="betForm">
+  <!-- The bet modal: Prompts the user to place their bet amount from their wallet-->
+  <div id="betModal" class="modal">
+    <div class="modalContent">
+      <h1>Place Your Bet</h1>
+      <form id="betForm">
         <label for="betAmount">How much money would you like to bet?</label><br>
         $ <input type="number" id="betAmount" name="betAmount" min="0" value="0"><br>
         <button id="betSubmitButton" type="submit">Submit</button>
-    </form>
+      </form>
+    </div>
   </div>
-</div>
 
-<script>
-// The bet modal:
-var modal = document.getElementById("betModal");
-var betSubmitButton = document.getElementById("betSubmitButton");
+  <script>
+    // The bet modal*******************************************************
+    var modal = document.getElementById("betModal");
+    var betSubmitButton = document.getElementById("betSubmitButton");
 
-betSubmitButton.onclick = function(event) {
-  modal.style.display = "none";
-  event.preventDefault();
-  var betAmount = document.getElementById("betAmount").value;
-  var displayBetAmount = document.getElementById("displayBetAmount");
-  displayBetAmount.innerHTML = "$" + parseFloat(betAmount).toFixed(2);
-}
+    betSubmitButton.onclick = function (event) {
+      modal.style.display = "none";
+      event.preventDefault();
+      var betAmount = document.getElementById("betAmount").value;
+      var displayBetAmount = document.getElementById("displayBetAmount");
+      displayBetAmount.innerHTML = "$" + parseFloat(betAmount).toFixed(2);
+    }
 
-</script>
+    // Create card deck********************************************
+    var deck = [];
+    var suits = ["diamond", "clubs", "hearts", "spades"];
+    var faceCards = ["J", "Q", "K"];
+    for (let i = 0; i < suits.length; i++) {
+
+      // Create number cards
+      for (let j = 2; j <= 10; j++) {
+        deck.push({ text: j, value: j, suit: suits[i] });
+      };
+
+      // Create face cards
+      for (let k = 0; k < faceCards.length; k++) {
+        deck.push({ text: faceCards[k], value: 10, suit: suits[i] });
+      };
+
+      // Create A card - default value is 1
+      deck.push({ text: "A", value: 1, suit: suits[i] });
+    }
+
+
+
+    console.log(deck);
+
+  </script>
 </body>
+
 </html>
