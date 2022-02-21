@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="blackjack-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<p>Your bet amount: <span id="displayBetAmount"></span></p>
+
+<!-- The bet modal: Prompts the user to place their bet amount from their wallet-->
+<div id="betModal" class="modal">
+  <div class="modalContent">
+    <h1>Place Your Bet</h1>
+    <form id="betForm">
+        <label for="betAmount">How much money would you like to bet?</label><br>
+        $ <input type="number" id="betAmount" name="betAmount" min="0" value="0"><br>
+        <button id="betSubmitButton" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+<script>
+// The bet modal:
+var modal = document.getElementById("betModal");
+var betSubmitButton = document.getElementById("betSubmitButton");
+
+betSubmitButton.onclick = function(event) {
+  modal.style.display = "none";
+  event.preventDefault();
+  var betAmount = document.getElementById("betAmount").value;
+  var displayBetAmount = document.getElementById("displayBetAmount");
+  displayBetAmount.innerHTML = "$" + parseFloat(betAmount).toFixed(2);
+}
+
+</script>
+</body>
+</html>
