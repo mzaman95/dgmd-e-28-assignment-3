@@ -52,7 +52,7 @@ An ace and a ten card are 21 in two cards, which is called Blackjack/Natural.
 
 - _Number cards:_ The number is the value of the card.
 - _Face cards:_ The value of face cards is 10.
-- _Ace:_ Either 1 or 11. It is counted as 11 generally unless it would put you over 21, in which case it counts as 1.
+- _Ace:_ In the initial draw it is valued at 11 unless it causes you to bust-then it is valued at 1. In subsequent turns it is valued at 1.
 
 **Rules**
 

@@ -68,7 +68,7 @@
       };
 
       // Create A card - default value is 1
-      deck.push({ text: "A", value: 11, suit: suits[i] });
+      deck.push({ text: "A", value: 1, suit: suits[i] });
     }
 
 
@@ -111,8 +111,13 @@
       displayDealerTotal.innerHTML = dealerTotal;
     }
 
+    const changeAValue = () => {
+      playerTotal += 10;
+      displayPlayerTotal.innerHTML = playerTotal;
+    }
+
     // To create a new card and append to parent element
-    const createNewCard = (parentElement, player) => {
+    const createNewCard = (parentElement, player, initialDeal) => {
       let randomGeneratedCard = getRandomCard();
       let newCard = document.createElement("div");
       newCard.setAttribute("id", "card");
@@ -127,15 +132,19 @@
       parentElement.appendChild(newCard);
       if (player == "user") {
         setPlayerTotal(randomGeneratedCard.value);
+        // Since the default value of A is 1 except in the first deal it is valued at 11 so long as it doesn't bust - then it is valued at 1
+        if (initialDeal && (randomGeneratedCard.text == "A") && (playerTotal < 21)) {
+          changeAValue();
+        };
       }
       if (player == "dealer") {
         setDealerTotal(randomGeneratedCard.value);
       }
     }
 
-    createNewCard(playerCards, "user");
-    createNewCard(playerCards, "user");
-    createNewCard(dealerCards, "dealer");
+    createNewCard(playerCards, "user", true);
+    createNewCard(playerCards, "user", true);
+    createNewCard(dealerCards, "dealer", true);
 
   </script>
 </body>
