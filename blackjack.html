@@ -12,6 +12,7 @@
 <body>
   <h1 id="gameTitle">B L A C K J A C K</h1>
   <p>Your bet amount: <span id="displayBetAmount"></span></p>
+  <div id="actions"></div>
   <div class="row">
     <div class="column">
       <h2>Y O U</h2>
@@ -39,112 +40,125 @@
   </div>
 
   <script>
-    // The bet modal*******************************************************
-    var modal = document.getElementById("betModal");
-    var betSubmitButton = document.getElementById("betSubmitButton");
-
-    betSubmitButton.onclick = function (event) {
-      modal.style.display = "none";
-      event.preventDefault();
-      var betAmount = document.getElementById("betAmount").value;
+    window.onload = () => {
+      // The bet modal*******************************************************
+      var modal = document.getElementById("betModal");
+      var betSubmitButton = document.getElementById("betSubmitButton");
       var displayBetAmount = document.getElementById("displayBetAmount");
-      displayBetAmount.innerHTML = "$" + parseFloat(betAmount).toFixed(2);
-    }
+      var betAmountHidden = document.createElement("p");
 
-    // Create card deck********************************************
-    var deck = [];
-    var suits = ["diamonds", "clubs", "hearts", "spades"];
-    var faceCards = ["J", "Q", "K"];
-    for (let i = 0; i < suits.length; i++) {
-
-      // Create number cards
-      for (let j = 2; j <= 10; j++) {
-        deck.push({ text: j, value: j, suit: suits[i] });
-      };
-
-      // Create face cards
-      for (let k = 0; k < faceCards.length; k++) {
-        deck.push({ text: faceCards[k], value: 10, suit: suits[i] });
-      };
-
-      // Create A card - default value is 1
-      deck.push({ text: "A", value: 1, suit: suits[i] });
-    }
-
-
-    // Generate random card to select random card from the deck:
-    const getRandomCard = () => {
-      return deck[Math.floor(Math.random() * deck.length)];
-    }
-
-    // Get image/icon based on the suit
-    const getSuit = (suit) => {
-      switch (suit) {
-        case "hearts":
-          return "&hearts;";
-          break;
-        case "diamonds":
-          return "&diams;";
-          break;
-        case "clubs":
-          return "&clubs;";
-          break;
-        case "spades":
-          return "&spades;";
-          break;
+      betSubmitButton.onclick = function (event) {
+        modal.style.display = "none";
+        event.preventDefault();
+        var betAmount = document.getElementById("betAmount").value;
+        betAmountHidden.innerHTML = betAmount;
+        displayBetAmount.innerHTML = "$" + parseFloat(betAmount).toFixed(2);
       }
-    }
 
-    var playerTotal = 0;
-    var dealerTotal = 0;
+      // Create card deck********************************************
+      var deck = [];
+      var suits = ["diamonds", "clubs", "hearts", "spades"];
+      var faceCards = ["J", "Q", "K"];
+      for (let i = 0; i < suits.length; i++) {
 
-    let displayPlayerTotal = document.getElementById("displayPlayerTotal");
-    let displayDealerTotal = document.getElementById("displayDealerTotal");
-
-    const setPlayerTotal = (totalCount) => {
-      playerTotal += totalCount;
-      displayPlayerTotal.innerHTML = playerTotal;
-    }
-
-    const setDealerTotal = (totalCount) => {
-      dealerTotal += totalCount;
-      displayDealerTotal.innerHTML = dealerTotal;
-    }
-
-    const changeAValue = () => {
-      playerTotal += 10;
-      displayPlayerTotal.innerHTML = playerTotal;
-    }
-
-    // To create a new card and append to parent element
-    const createNewCard = (parentElement, player, initialDeal) => {
-      let randomGeneratedCard = getRandomCard();
-      let newCard = document.createElement("div");
-      newCard.setAttribute("id", "card");
-      let span = document.createElement("span");
-      span.setAttribute("class", "cardNumber");
-      span.innerHTML = randomGeneratedCard.text;
-      newCard.appendChild(span);
-      let suitSpan = document.createElement("span");
-      suitSpan.setAttribute("class", "suit");
-      suitSpan.innerHTML = getSuit(randomGeneratedCard.suit);
-      newCard.appendChild(suitSpan);
-      parentElement.appendChild(newCard);
-      if (player == "user") {
-        setPlayerTotal(randomGeneratedCard.value);
-        // Since the default value of A is 1 except in the first deal it is valued at 11 so long as it doesn't bust - then it is valued at 1
-        if (initialDeal && (randomGeneratedCard.text == "A") && (playerTotal < 21)) {
-          changeAValue();
+        // Create number cards
+        for (let j = 2; j <= 10; j++) {
+          deck.push({ text: j, value: j, suit: suits[i] });
         };
-      }
-      if (player == "dealer") {
-        setDealerTotal(randomGeneratedCard.value);
-      }
-    }
 
-    createNewCard(playerCards, "user", true);
-    createNewCard(playerCards, "user", true);
-    createNewCard(dealerCards, "dealer", true);
+        // Create face cards
+        for (let k = 0; k < faceCards.length; k++) {
+          deck.push({ text: faceCards[k], value: 10, suit: suits[i] });
+        };
+
+        // Create A card - default value is 1
+        deck.push({ text: "A", value: 1, suit: suits[i] });
+      }
+
+      // Generate random card to select random card from the deck:
+      const getRandomCard = () => {
+        return deck[Math.floor(Math.random() * deck.length)];
+      }
+
+      // Get image/icon based on the suit
+      const getSuit = (suit) => {
+        switch (suit) {
+          case "hearts":
+            return "&hearts;";
+            break;
+          case "diamonds":
+            return "&diams;";
+            break;
+          case "clubs":
+            return "&clubs;";
+            break;
+          case "spades":
+            return "&spades;";
+            break;
+        }
+      }
+
+      var playerTotal = 0;
+      var dealerTotal = 0;
+
+      let displayPlayerTotal = document.getElementById("displayPlayerTotal");
+      let displayDealerTotal = document.getElementById("displayDealerTotal");
+
+      const setPlayerTotal = (totalCount) => {
+        playerTotal += totalCount;
+        displayPlayerTotal.innerHTML = playerTotal;
+      }
+
+      const setDealerTotal = (totalCount) => {
+        dealerTotal += totalCount;
+        displayDealerTotal.innerHTML = dealerTotal;
+      }
+
+      const changeAValue = () => {
+        playerTotal += 10;
+        displayPlayerTotal.innerHTML = playerTotal;
+      }
+
+      // To create a new card and append to parent element
+      const createNewCard = (parentElement, player, initialDeal) => {
+        let randomGeneratedCard = getRandomCard();
+        let newCard = document.createElement("div");
+        newCard.setAttribute("id", "card");
+        let span = document.createElement("span");
+        span.setAttribute("class", "cardNumber");
+        span.innerHTML = randomGeneratedCard.text;
+        newCard.appendChild(span);
+        let suitSpan = document.createElement("span");
+        suitSpan.setAttribute("class", "suit");
+        suitSpan.innerHTML = getSuit(randomGeneratedCard.suit);
+        newCard.appendChild(suitSpan);
+        parentElement.appendChild(newCard);
+        if (player == "user") {
+          setPlayerTotal(randomGeneratedCard.value);
+          // Since the default value of A is 1 except in the first deal it is valued at 11 so long as it doesn't bust - then it is valued at 1
+          if (initialDeal && (randomGeneratedCard.text == "A") && (playerTotal < 21)) {
+            changeAValue();
+          };
+        }
+        if (player == "dealer") {
+          setDealerTotal(randomGeneratedCard.value);
+        }
+      }
+
+      createNewCard(playerCards, "user", true);
+      createNewCard(playerCards, "user", true);
+      createNewCard(dealerCards, "dealer", true);
+
+      // If the total of your 2 cards is 21, then you automatically win one and a half times your bet and you win the game.
+      var actionsDiv = document.getElementById("actions");
+      var actionsHeading = document.createElement("h3");
+
+      if (playerTotal == 21) {
+        actionsHeading.innerHTML = "Y O U  W I N !";
+        actionsDiv.appendChild(actionsHeading);
+      };
+
+    }
 
   </script>
 </body>
