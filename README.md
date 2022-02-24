@@ -75,5 +75,3 @@ following requirements:
 3. The card suit (diamond, heart, spade, club) must be displayed as an icon or image.
 4. The player has their hand of cards plus a “wallet” of money they can use to bet
 5. You may use events and any other means of input
-
-Next Steps is to add buttons for Hit/Stay, and implement the win/lose/reveal conditions.
