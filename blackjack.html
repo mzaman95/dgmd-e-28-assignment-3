@@ -11,7 +11,6 @@
 
 <body>
   <h1 id="gameTitle">B L A C K J A C K</h1>
-  <p>Your bet amount: <span id="displayBetAmount"></span></p>
   <div id="actions"></div>
   <div class="row">
     <div class="column">
@@ -44,15 +43,11 @@
       // The bet modal*******************************************************
       var modal = document.getElementById("betModal");
       var betSubmitButton = document.getElementById("betSubmitButton");
-      var displayBetAmount = document.getElementById("displayBetAmount");
       var betAmountHidden = document.createElement("p");
 
       betSubmitButton.onclick = function (event) {
         modal.style.display = "none";
         event.preventDefault();
-        var betAmount = document.getElementById("betAmount").value;
-        betAmountHidden.innerHTML = betAmount;
-        displayBetAmount.innerHTML = "$" + parseFloat(betAmount).toFixed(2);
       }
 
       // Create card deck********************************************
@@ -145,11 +140,11 @@
         }
       }
 
+      // creates 2 faceup cards for the player and 1 faceup card for the dealer
       createNewCard(playerCards, "user", true);
       createNewCard(playerCards, "user", true);
       createNewCard(dealerCards, "dealer", true);
 
-      // If the total of your 2 cards is 21, then you automatically win one and a half times your bet and you win the game.
       var actionsDiv = document.getElementById("actions");
       var actionsHeading = document.createElement("h3");
 
