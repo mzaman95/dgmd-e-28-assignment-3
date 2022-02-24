@@ -75,3 +75,23 @@ following requirements:
 - [x] The card suit (diamond, heart, spade, club) must be displayed as an icon or image.
 - [x] The player has their hand of cards plus a “wallet” of money they can use to bet
 - [x] You may use events and any other means of input
+
+**Screenshots**
+
+User placing a bet from the money in their wallet
+![placingBet](placingBet.png)
+
+Initial screen shows the user with 2 faceup cards and the dealer with 1 faceup and 1 facedown card; the totals of both the player and the dealer are shown at the top
+![initialScreen](initialScreen.png)
+
+Scenario where the user got Blackjack on initial draw (total of 21 on the first 2 cards)
+![initial21](initial21.png)
+
+Scenario where the user chose "Hit" and then bust
+![bustOnHit](bustOnHit.png)
+
+Scenario where user chose "Stay" and won
+![stayWon](stayWon.png)
+
+Scenario where user chose "Stay" and lost
+![stayLost](stayLost.png)
