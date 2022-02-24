@@ -148,22 +148,29 @@
       var actionsDiv = document.getElementById("actions");
       var actionsHeading = document.createElement("h3");
 
+      // Messages based on player's final status
+      const WINNER_MSG = "W I N N E R !";
+      const BUST_MSG = "B U S T !";
+      const LOSER_MSG = "L O S E R !";
+
+      const setMessage = (message) => {
+        actionsHeading.innerHTML = message;
+        actionsDiv.appendChild(actionsHeading);
+      }
+
       const checkForBust = () => {
         if (playerTotal == 21) {
-          actionsHeading.innerHTML = "W I N N E R !";
-          actionsDiv.appendChild(actionsHeading);
+          setMessage(WINNER_MSG);
         }
         if (playerTotal > 21) {
-          actionsHeading.innerHTML = "B U S T !";
-          actionsDiv.appendChild(actionsHeading);
+          setMessage(BUST_MSG);
           hitButton.setAttribute("disabled", "true");
           stayButton.setAttribute("disabled", "true");
         }
       }
 
       if (playerTotal == 21) {
-        actionsHeading.innerHTML = "W I N N E R !";
-        actionsDiv.appendChild(actionsHeading);
+        setMessage(WINNER_MSG);
       } else {
         var hitButton = document.createElement("button");
         hitButton.setAttribute("id", "hitButton");
@@ -185,20 +192,16 @@
           if (dealerTotal < 17) {
             createNewCard(dealerCards, "dealer", false);
           }
-
           if (dealerTotal > 21 || (playerTotal > dealerTotal)) {
-            actionsHeading.innerHTML = "W I N N E R !";
-            actionsDiv.appendChild(actionsHeading);
+            setMessage(WINNER_MSG);
           }
           else {
-            actionsHeading.innerHTML = "L O S E R !";
-            actionsDiv.appendChild(actionsHeading);
+            setMessage(LOSER_MSG);
           }
         })
 
       }
     }
-
   </script>
 </body>
 
