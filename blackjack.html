@@ -154,10 +154,22 @@
       var actionsHeading = document.createElement("h3");
 
       if (playerTotal == 21) {
-        actionsHeading.innerHTML = "Y O U  W I N !";
+        actionsHeading.innerHTML = "W I N N E R !";
         actionsDiv.appendChild(actionsHeading);
-      };
+      } else {
+        var hitButton = document.createElement("button");
+        hitButton.setAttribute("id", "hitButton");
+        hitButton.innerHTML = "Hit";
+        actionsDiv.appendChild(hitButton);
+        hitButton.addEventListener("click", () => {
+          createNewCard(playerCards, "user", false);
+        });
 
+        var stayButton = document.createElement("button");
+        stayButton.setAttribute("id", "stayButton");
+        stayButton.innerHTML = "Stay";
+        actionsDiv.appendChild(stayButton);
+      }
     }
 
   </script>

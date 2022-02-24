@@ -23,6 +23,10 @@ p {
     text-align: center;
 }
 
+#actions {
+  text-align: center;
+}
+
 #gameTitle {
   color: #ffe66c;
   text-align: center;
@@ -60,10 +64,22 @@ button {
 	cursor: pointer;
 	display: inline-block;
 	font-size: 16px;
-	margin: 25px 2px 0px 2px;
+	margin: 25px 2px 0px 10px;
 	padding: 15px 40px;
 	text-align: center;
 	text-decoration: none;
+}
+
+button:hover {
+  background-color: #f5d742;
+}
+
+#hitButton {
+  background-color: #ffc0a9;
+}
+
+#hitButton:hover {
+  background-color: #f7a486;
 }
 
 input[type=number] {
